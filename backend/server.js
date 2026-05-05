@@ -1,8 +1,11 @@
 const dotenv = require("dotenv");
+dotenv.config();
 
 const express = require("express");
 const cors = require("cors");
+
 const connectDB = require("./config/db");
+
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
@@ -15,19 +18,29 @@ const productAdminRoutes = require("./routes/productAdminRoutes");
 const adminOrderRoutes = require("./routes/adminOrderRoutes");
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
-dotenv.config();
+let isConnected = false;
 
-const PORT = process.env.PORT || 3000;
+const connectDBOnce = async () => {
+  if (!isConnected) {
+    await connectDB();
+    isConnected = true;
+  }
+};
 
-connectDB();
+app.use(async (req, res, next) => {
+  await connectDBOnce();
+  next();
+});
+
 app.get("/", (req, res) => {
   res.send("Welcome to Terrarium...");
 });
 
-//API Routes
+// Routes
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
@@ -36,11 +49,9 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api", subscribeRoute);
 
-//Admin routes
 app.use("/api/admin/users", adminRoutes);
 app.use("/api/admin/products", productAdminRoutes);
 app.use("/api/admin/orders", adminOrderRoutes);
 
-app.listen(PORT, () => {
-  console.log(`server is running on http://localhost:${PORT}`);
-});
+// ✅ IMPORTANT for Vercel
+module.exports = app;
