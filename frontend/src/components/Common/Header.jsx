@@ -1,12 +1,12 @@
 import React from "react";
-import Topbar from "../Layout/TopBar";
+import TopBar from "../Layout/TopBar";
 import NavBar from "../Layout/NavBar";
 
 const Header = () => {
   return (
     <div>
-      {/*topbar*/}
-      <Topbar />
+      {/*topBar*/}
+      <TopBar />
       {/*navbar */}
       <NavBar />
     </div>
