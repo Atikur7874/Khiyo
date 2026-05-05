@@ -9,7 +9,7 @@
       }
     }
   ],
-  "rewriters": [
+  "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/"
