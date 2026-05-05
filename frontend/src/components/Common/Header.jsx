@@ -5,9 +5,7 @@ import NavBar from "../Layout/NavBar";
 const Header = () => {
   return (
     <div>
-      {/*topBar*/}
       <TopBar />
-      {/*navbar */}
       <NavBar />
     </div>
   );

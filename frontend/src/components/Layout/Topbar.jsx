@@ -2,7 +2,7 @@ import React from "react";
 import { FaFacebook } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io";
 
-const Topbar = () => {
+const TopBar = () => {
   return (
     <div className="bg-[#8BCA3D] text-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-4">
@@ -27,4 +27,4 @@ const Topbar = () => {
   );
 };
 
-export default Topbar;
+export default TopBar;
