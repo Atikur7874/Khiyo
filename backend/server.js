@@ -24,18 +24,12 @@ app.use(cors());
 
 let isConnected = false;
 
-const connectDBOnce = async () => {
-  if (!isConnected) {
-    await connectDB();
-    isConnected = true;
-  }
-};
+dotenv.config();
 
-app.use(async (req, res, next) => {
-  await connectDBOnce();
-  next();
+connectDB();
+app.get("/", (req, res) => {
+  res.send("Welcome to Terrarium...");
 });
-
 app.get("/", (req, res) => {
   res.send("Welcome to Terrarium...");
 });
